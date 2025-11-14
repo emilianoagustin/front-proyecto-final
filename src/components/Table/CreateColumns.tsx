@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IColumnsActions } from "@/types/types";
 
-export const createColumns = (
+export const CreateColumns = (
   actions: IColumnsActions
 ): ColumnDef<Product>[] => [
   {

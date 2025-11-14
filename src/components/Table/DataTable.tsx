@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -20,6 +21,13 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: IDataTableProps<TData, TValue>) {
+  const [viewDialog, setViewDialog] = useState({ open: false, product: null });
+  const [editDialog, setEditDialog] = useState({ open: false, product: null });
+  const [deleteDialog, setDeleteDialog] = useState({
+    open: false,
+    productId: null,
+  });
+
   const table = useReactTable({
     data,
     columns,

@@ -11,3 +11,9 @@ export interface IDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
+
+export interface INewProduct {
+  name: string;
+  price: number;
+  categories: string[];
+}
