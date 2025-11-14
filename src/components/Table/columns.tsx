@@ -2,18 +2,19 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Product } from "@/types/Product.types";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Eye, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { IColumnsActions } from "@/types/types";
 
-export const columns: ColumnDef<Product>[] = [
+export const createColumns = (
+  actions: IColumnsActions
+): ColumnDef<Product>[] => [
   {
     accessorKey: "name",
     header: "Name",
@@ -42,26 +43,31 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => {
-      const payment = row.original;
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Button variant="ghost" className="h-8 w-8 p-9">
-              <span className="sr-only">Open menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Details
+            <DropdownMenuItem onClick={() => actions.onView(row.original)}>
+              <Eye className="mr-2 h-4 w-4" />
+              View Details
             </DropdownMenuItem>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem className="text-red-700">Delete</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => actions.onEdit(row.original)}>
+              <Pencil className="mr-2 h-4 w-4" />
+              Update
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => actions.onDelete(row.original.id)}
+              className="text-red-700"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
