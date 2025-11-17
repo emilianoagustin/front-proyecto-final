@@ -45,11 +45,9 @@ export function useProducts() {
 }
 
 export function useProduct(id: string): UseQueryResult<Product, Error> {
-  const { data } = useQuery({
+  return useQuery({
     queryKey: ["product", id],
     queryFn: () => api.getProductById(id),
     staleTime: 6000,
   });
-
-  return data;
 }
