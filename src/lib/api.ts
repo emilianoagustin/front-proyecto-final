@@ -1,4 +1,4 @@
-import { Product, INewProduct } from "@/types/Product.types";
+import { Product, INewProduct, IUpdateHTTP } from "@/types/Product.types";
 
 const API_URL = "http://localhost:8080/api/products";
 
@@ -22,13 +22,14 @@ export const api = {
   },
 
   async createProduct(data: INewProduct): Promise<Product> {
-    const response = await fetch(API_URL, {
+    const response = await fetch(`${API_URL}/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data }),
     });
     if (!response.ok) throw new Error("Failed to create product");
-    return response.json();
+    const newProduct = await response.json();
+    return newProduct.data;
   },
 
   async deleteProduct(id: string): Promise<void> {
@@ -36,5 +37,16 @@ export const api = {
       method: "DELETE",
     });
     if (!response.ok) throw new Error("Failed to delete product");
+  },
+
+  async updateProduct({ id, data }: IUpdateHTTP): Promise<Product> {
+    const response = await fetch(`${API_URL}/update/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...data }),
+    });
+    if (!response.ok) throw new Error("Failed to delete product");
+    const updatedProduct = await response.json();
+    return updatedProduct.data;
   },
 };

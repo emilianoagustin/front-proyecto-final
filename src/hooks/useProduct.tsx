@@ -4,7 +4,7 @@ import {
   useMutation,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { Product } from "@/types/Product.types";
+import { Product, IUpdateHTTP } from "@/types/Product.types";
 import { api } from "@/lib/api";
 
 export function useProducts() {
@@ -33,14 +33,23 @@ export function useProducts() {
     },
   });
 
+  const updateProduct = useMutation({
+    mutationFn: ({ id, data }: IUpdateHTTP) => api.updateProduct({ id, data }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+
   return {
     products: queryAllProducts.data,
     isLoading: queryAllProducts.isLoading,
     error: queryAllProducts.error,
     createProduct: createProduct.mutate,
     deleteProduct: deleteProduct.mutate,
+    updateProduct: updateProduct.mutate,
     isCreating: createProduct.isPending,
     isDeleting: deleteProduct.isPending,
+    isUpdating: updateProduct.isPending,
   };
 }
 
