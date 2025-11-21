@@ -19,8 +19,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { CirclePlus, Pencil } from "lucide-react";
 import { ProductForm } from "@/components/Form/product-form";
-import { CirclePlus, Pencil, Trash2 } from "lucide-react";
+import { DeleteButton } from "@/components/DeleteButton/delete-product-button";
 
 export function ProductTable() {
   const { products, isLoading } = useProducts();
@@ -36,7 +37,7 @@ export function ProductTable() {
               Create Product <CirclePlus className="size-4" />
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent aria-describedby="Create new product form">
             <DialogHeader>
               <DialogTitle>Create a new product</DialogTitle>
               <DialogDescription>
@@ -68,12 +69,20 @@ export function ProductTable() {
                   {product.categories.toString().replace(/,/g, " - ")}
                 </TableCell>
                 <TableCell className="text-right">
-                  <Button variant="ghost">
-                    <Pencil className="size-4" />
-                  </Button>
-                  <Button variant="ghost">
-                    <Trash2 className="size-4" />
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost">
+                        <Pencil className="size-4" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent aria-describedby="Update product form">
+                      <DialogHeader>
+                        <DialogTitle>Update product</DialogTitle>
+                        <ProductForm product={product} />
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
+                  <DeleteButton productId={product.id} />
                 </TableCell>
               </TableRow>
             );
