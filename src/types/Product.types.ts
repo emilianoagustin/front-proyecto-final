@@ -28,3 +28,8 @@ export interface IDeleteButtonProps {
 export interface IFormProps {
   product?: Product;
 }
+
+export interface IUserCredentialsProps {
+  email: string;
+  password: string;
+}
