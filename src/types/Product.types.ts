@@ -1,13 +1,13 @@
 export type Product = {
   id: string;
   name: string;
-  price: number;
+  price: string;
   categories: string[];
 };
 
 export interface INewProduct {
   name: string;
-  price: number;
+  price: string;
   categories: string[];
 }
 
