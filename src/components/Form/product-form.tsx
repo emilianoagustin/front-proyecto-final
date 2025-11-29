@@ -37,7 +37,7 @@ export function ProductForm({ product }: IFormProps) {
       updateProduct({ id: product.id, data: values });
       toast.success("Product updated successfully!");
     } else {
-      createProduct(values);
+      createProduct({ ...values });
       form.reset();
       toast.success("Product created successfully!");
     }

@@ -12,3 +12,8 @@ export const formSchema = z.object({
     .min(1, "Category is required")
     .max(3, "Only three or less categories allowed"),
 });
+
+export const authSchema = z.object({
+  email: z.email("Email is required"),
+  password: z.string().min(1, "Password is required"),
+});
