@@ -5,8 +5,8 @@ import {
   IUserCredentialsProps,
 } from "@/types/Product.types";
 
-// const API_URL = "https://proyecto-final-nu-liard.vercel.app";
-const API_URL = "http://localhost:8080";
+const API_URL =
+  "https://proyecto-final-git-develop-emiliano-agustins-projects.vercel.app";
 
 export const api = {
   async getAllproducts(): Promise<Product[]> {
