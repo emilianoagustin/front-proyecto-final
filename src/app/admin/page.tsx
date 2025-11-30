@@ -1,7 +1,7 @@
 import { ProductTable } from "@/components/Table/product-table";
 import { NavBar } from "@/components/navbar";
 
-export default async function AdminPage() {
+export default function AdminPage() {
   return (
     <>
       <NavBar />
