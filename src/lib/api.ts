@@ -6,7 +6,7 @@ import {
 } from "@/types/Product.types";
 
 const API_URL =
-  "https://proyecto-final-git-develop-emiliano-agustins-projects.vercel.app/";
+  "https://proyecto-final-git-develop-emiliano-agustins-projects.vercel.app";
 
 export const api = {
   async getAllproducts(): Promise<Product[]> {
